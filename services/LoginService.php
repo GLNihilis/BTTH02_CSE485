@@ -1,21 +1,16 @@
 <?php
+include("config/DBconnection.php");
+include("models/Login.php");
 class LoginService
 {
-    protected $user;
-
-    public function __construct(User $user)
+    public function CheckLogin($username, $password)
     {
-        $this -> user = $user
-    }
+        $db = new DBConnection();
+        $conn = $db -> getConnection();
 
-    public function getAllUsers(
-        {
-            try{
-                return $this -> user -> all() -> toArray();
-            } catch (Exception $exception) {
-                throw new Exception($exception -> getMessage());
-            }
-        }
-    )
+        $sql = "SELECT * FROM users WHERE user = '$username' AND pass = '$password'";
+        $stmt = $conn -> query($sql);
+        return $stmt -> fetch();
+    }
 }
 ?>
