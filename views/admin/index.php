@@ -7,10 +7,16 @@
     <title>Music for Life</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style_login.css">
+    <link rel="stylesheet" href="./asset/css/style_login.css">
 </head>
 <body>
     <header>
+        <?php
+            $index = null;
+            if(isset($_GET['index'])){
+                $index = $_GET['index'];
+            }
+        ?>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
                 <div class="h3">
@@ -25,17 +31,20 @@
                         <a class="nav-link active fw-bold" aria-current="page" href="./">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.php">Trang ngoài</a>
+                        <a class="nav-link <?php echo $index == null ? 'active' : '' ?>" href="index.php?controller=admin">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="category.php">Thể loại</a>
+                        <a class="nav-link <?php echo $index == 1 ? 'active' : '' ?>" href="index.php?controller=category&index=1">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="author.php">Tác giả</a>
+                        <a class="nav-link <?php echo $index == 2 ? 'active' : '' ?>" href="index.php?controller=author&index=2">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="article.php">Bài viết</a>
+                        <a class="nav-link <?php echo $index == 3 ? 'active' : '' ?>" href="index.php?controller=article&index=3">Bài viết</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Logout</a>
+                    </li>    
                 </ul>
                 </div>
             </div>
@@ -67,7 +76,7 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            10
+                            <?php echo count($categorys) ?>
                         </h5>
                     </div>
                 </div>
@@ -81,7 +90,7 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            20
+                            <?php echo count($authors) ?>
                         </h5>
                     </div>
                 </div>
@@ -95,7 +104,7 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            110
+                            <?php echo count($articles) ?>
                         </h5>
                     </div>
                 </div>

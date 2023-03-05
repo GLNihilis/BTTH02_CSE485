@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="./asset/css/style.css">
 </head>
 <body>
-    <header>
+<header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
                 <div class="my-logo">
                     <a class="navbar-brand" href="#">
-                        <img src="images/logo2.png" alt="" class="img-fluid">
+                        <img src="./asset/images/logo2.png" alt="" class="img-fluid">
                     </a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@
                     <a class="nav-link active" aria-current="page" href="./">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="./login.php">Đăng nhập</a>
+                    <a class="nav-link" href="index.php?controller=login">Đăng nhập</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
@@ -45,13 +45,13 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img src="images/slideshow/slide01.jpg" class="d-block w-100" alt="...">
+                <img src="./asset/images/slideshow/slide01.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                <img src="images/slideshow/slide02.jpg" class="d-block w-100" alt="...">
+                <img src="./asset/images/slideshow/slide02.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                <img src="images/slideshow/slide03.jpg" class="d-block w-100" alt="...">
+                <img src="./asset/images/slideshow/slide03.jpg" class="d-block w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -69,7 +69,7 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs/cayvagio.jpg" class="card-img-top" alt="...">
+                    <img src="./asset/images/songs/cayvagio.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">
                             <a href="" class="text-decoration-none">Cây, lá và gió</a>
@@ -80,7 +80,7 @@
 
             <div class="col-sm-3">
                 <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs/csmt.jpg" class="card-img-top" alt="...">
+                    <img src="./asset/images/songs/csmt.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">
                             <a href="" class="text-decoration-none">Cuộc sống mến thương</a>
@@ -91,7 +91,7 @@
 
             <div class="col-sm-3">
                 <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs//longme.jpg" class="card-img-top" alt="...">
+                    <img src="./asset/images/songs//longme.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">
                             <a href="" class="text-decoration-none">Lòng mẹ</a>
@@ -102,7 +102,7 @@
 
             <div class="col-sm-3">
                 <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs/phoipha.jpg" class="card-img-top" alt="...">
+                    <img src="./asset/images/songs/phoipha.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">
                             <a href="" class="text-decoration-none">Phôi pha</a>
@@ -113,7 +113,7 @@
 
             <div class="col-sm-3">
                 <div class="card mb-2" style="width: 100%;">
-                    <img src="images/songs/noitinhyeubatdau.jpg" class="card-img-top" alt="...">
+                    <img src="./asset/images/songs/noitinhyeubatdau.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center my-title">
                             <a href="" class="text-decoration-none">Nơi tình yêu bắt đầu</a>
