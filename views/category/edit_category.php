@@ -11,14 +11,6 @@
 </head>
 <body>
     <header>
-    <?php
-            $index = null;
-            if(isset($_GET['index'])){
-                $index = $_GET['index'];
-            }
-
-
-        ?>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow p-3 bg-white rounded">
             <div class="container-fluid">
                 <div class="h3">
@@ -54,33 +46,23 @@
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-            <a href="index.php?controller=category&action=create" class="btn btn-success">Thêm mới</a>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tên thể loại</th>
-                            <th>Sửa</th>
-                            <th>Xóa</th>
-                        </tr>
-                    </thead>  
-                    <?php
-                            foreach($categorys as $key => $item){
-                        ?>
-                            <tr>
-                                <th scope="row"><?php echo $item->getMa_tloai() ?></th>
-                                <td><?php echo $item->getTen_tloai() ?></td>
-                                <td>
-                                    <a href="index.php?id=<?php echo $item->getMa_tloai() ?>&controller=category&action=edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                                </td>
-                                <td>
-                                    <a href="javascript:void(0);" onclick="showConfirmationDialog(<?php echo $item->getMa_tloai() ?>)"><i class="fa-solid fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        <?php        
-                            }
-                        ?>
-                </table>
+                <h3 class="text-center text-uppercase fw-bold">Sửa thông tin thể loại</h3>
+                <form action="./index.php?controller=category&action=update" method="post">
+                <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatId">Mã thể loại</span>
+                        <input type="text" class="form-control" name="txtCatId" readonly value="<?php echo $id?>">
+                    </div>
+
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblCatName">Tên thể loại</span>
+                        <input type="text" class="form-control" name="txtCatName" value = "<?php echo $category[0]->getTen_tloai() ?>">
+                    </div>
+
+                    <div class="form-group  float-end ">
+                        <input type="submit" value="Lưu lại" class="btn btn-success" name="save">
+                        <a href="./index.php?controller=category" class="btn btn-warning ">Quay lại</a>
+                    </div>
+                </form>
             </div>
         </div>
     </main>
@@ -88,12 +70,5 @@
         <h4 class="text-center text-uppercase fw-bold">TLU's music garden</h4>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script>
-        function showConfirmationDialog(id){
-            if(confirm("Các bài viết thuộc thể loại sẽ bị xóa. Bạn có muốn xóa không?")){
-                window.location.href = "index.php?controller=category&action=delete&id=" + id;
-            }
-        }
-    </script>
 </body>
 </html>

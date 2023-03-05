@@ -7,6 +7,20 @@ body{
     background-color:#fff !important;
 }
 
+.container{
+
+}
+.card-body{
+    padding: 15px 0;
+}
+.card-body a{
+    color: #000;
+}
+.card{
+    border: none;
+    padding: 5px;
+}
+
 .my-logo{
     max-width: 20%;
 }

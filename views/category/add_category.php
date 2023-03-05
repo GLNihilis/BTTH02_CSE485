@@ -48,7 +48,7 @@
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Thêm mới thể loại</h3>
-                <form action="process_add_category.php" method="post">
+                <form action="./index.php?controller=category&action=add" method="post">
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Tên thể loại</span>
                         <input type="text" class="form-control" name="txtCatName" >
@@ -56,11 +56,11 @@
 
                     <div class="form-group  float-end ">
                         <input type="submit" value="Thêm" class="btn btn-success">
-                        <a href="category.php" class="btn btn-warning ">Quay lại</a>
+                        <a href="./index.php?controller=category" class="btn btn-warning ">Quay lại</a>
                     </div>
                 </form>
             </div>
-        </div>   
+        </div>
     </main>
 
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">
@@ -71,12 +71,7 @@
         const form = document.querySelector('form');
         form.addEventListener('submit',(event)=>{
             event.preventDefault();
-            var maTheLoai = document.querySelector('input[name="txtIDCat"]');
-            var tenTheLoai = document.querySelector('input[name="txtCatName"]');
-            if (maTheLoai.value.trim() === '') {
-                    alert('Bạn chưa nhập Mã thể loại');
-                    return;
-                }
+            var tenTheLoai = document.querySelector('input[name="txtCatName"]');            
             if (tenTheLoai.value.trim() === '') {
                     alert('Bạn chưa nhập Tên thể loại');
                     return;
