@@ -77,7 +77,7 @@ if(isset($_POST['btnLogin']))
     </header>
     <main class="container mt-5 mb-5">
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
-        <div class="d-flex justify-content-center h-100">
+            <div class="d-flex justify-content-center h-100">
                 <div class="card">
                     <div class="card-header">
                         <h3>Sign In</h3>
@@ -116,8 +116,7 @@ if(isset($_POST['btnLogin']))
                         </div>
                     </div>
                 </div>
-
-        </div>
+            </div>
     </main>
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">
         <h4 class="text-center text-uppercase fw-bold">TLU's music garden</h4>
