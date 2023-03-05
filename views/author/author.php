@@ -79,6 +79,13 @@
             </table>
         </div>
     </div>
+    <script>
+    function showConfirmationDialog(id) {
+    if (confirm("Xóa tác giả sẽ xóa toàn bộ bài viết của tác giả. Bạn có muốn xóa không?")) {
+        window.location.href = "index.php?controller=author&action=delete&ma_tgia=" + id;
+    }
+}
+</script>
     </main>
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">
         <h4 class="text-center text-uppercase fw-bold">TLU's music garden</h4>
