@@ -8,8 +8,7 @@
     <title>Sửa bài viết</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style_login.css">
-    <script src="../js/ckeditor/ckeditor.js"></script>
+    <script src="asset/javascript/ckeditor/ckeditor.js"></script>
 
 </head>
 
@@ -44,129 +43,77 @@
                 </div>
             </div>
         </nav>
-
     </header>
     <main class="container mt-5 mb-5">
-
-        <?php
-
-        // Lấy giá trị ma_bviet từ URL
-        if (isset($_GET['id'])) {
-            $ma_bviet = intval($_GET['id']);
-        } else {
-            // Nếu không có mã bài viết, chuyển hướng về trang danh sách bài viết
-            header('Location: article.php');
-            exit();
-        }
-
-        // Truy vấn SQL để lấy dữ liệu của bài viết có ma_bviet tương ứng
-        $sql = "SELECT bv.*, tl.ten_tloai, tg.ten_tgia FROM baiviet bv, theloai tl, tacgia tg 
-        WHERE bv.ma_tgia = tg.ma_tgia AND bv.ma_tloai = tl.ma_tloai AND bv.ma_bviet = $ma_bviet";
-        $result=$conn->query($sql);
-
-        // Lấy dữ liệu bài viết từ kết quả truy vấn
-        $article = $result ->fetch()
-        ?>
-
-
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Sửa bài viết</h3>
                 <form action="process_edit_article.php" method="post" enctype="multipart/form-data">
                     <div class="input-group mt-3 mb-3">
                         <span style="width: 10%" class="input-group-text" id="lblTieuDe">Mã bài viết</span>
-                        <input style="background-color: #DCDCDC" readonly type="text" class="form-control" name="txtMaBViet" value="<?php echo $article['ma_bviet']; ?>">
+                        <input style="background-color: #DCDCDC" readonly type="text" class="form-control" name="txtMaBViet" value="<?php echo $ma_bviet; ?>">
                     </div>
                     <div class="input-group mt-3 mb-3">
                         <span style="width: 10%" class="input-group-text" id="lblTieuDe">Tiêu đề (*)</span>
-                        <input type="text" class="form-control" name="txtTieuDe" value="<?php echo $article['tieude']; ?>">
+                        <input type="text" class="form-control" name="txtTieuDe" value="<?php echo $article[0]->getTieuDe(); ?>">
                     </div>
 
                     <div class="input-group mt-3 mb-3">
                         <span style="width: 10%" class="input-group-text" id="lblTenBaiHat">Tên bài hát (*)</span>
-                        <input type="text" class="form-control" name="txtTenBaiHat" value="<?php echo $article['ten_bhat']; ?>">
+                        <input type="text" class="form-control" name="txtTenBaiHat" value="<?php echo $article[0]->getTenBHat(); ?>">
                     </div>
 
                     <div class="input-group mt-3 mb-3">
                         <span style="width: 10%" class="input-group-text" id="lblTheLoai">Thể loại (*)</span>
-                        <select class="form-select" name="txtTheLoai" >
-                            <?php
-
-                            // Lấy danh sách thể loại từ bảng theloai
-                            $sql = "SELECT * FROM theloai";
-                            $result=$conn->query($sql);
-
-                            // Hiển thị các tùy chọn thể loại trong dropdown list
-                            while ($row = $result ->fetch()) {
-                                if ($row['ma_tloai'] == $article['ma_tloai']) {
-                                    echo '<option value="' . $row['ma_tloai'] . '" selected>' . $row['ten_tloai'] . '</option>';
-                                } else {
-                                    echo '<option value="' . $row['ma_tloai'] . '">' . $row['ten_tloai'] . '</option>';
-                                }
+                        <select class='form-select' name='txtTheLoai'>
+                        <?php
+                        foreach($categorys as $key => $item){
+                            if($key == $article[0]->getMaTLoai()){
+                                echo "<option value='".$key."' selected>".$item."</option>";
                             }
-                            ?>
+                            echo "<option value='".$key."'>".$item."</option>";
+                        }
+                        ?>
                         </select>
                     </div>
 
                     <div class="input-group mt-3 mb-3">
                         <span style="width: 10%" class="input-group-text" id="lblTomTat">Tóm tắt</span>
-                        <textarea class="form-control" name="txtTomTat" rows="3"><?php echo $article['tomtat']; ?></textarea>
+                        <textarea class="form-control" name="txtTomTat" rows="3"><?php echo $article[0]->getTomTat(); ?></textarea>
                     </div>
 
                     <div class="input-group mt-3 mb-3">
                         <span style="width: 10%" class="input-group-text" id="lblNoiDung">Nội dung</span>
-                        <textarea class="form-control" name="txtNoiDung" rows="10" id="ckeditor1"><?php echo $article['noidung']; ?></textarea>
+                        <textarea class="form-control" name="txtNoiDung" rows="10" id="ckeditor1"><?php echo $article[0]->getNoiDung(); ?></textarea>
                     </div>
 
                     <div class="input-group mt-3 mb-3">
                         <span style="width: 10%" class="input-group-text" id="lblTacGia">Tác giả (*)</span>
-                        <select class="form-select" name="txtTacGia">
-                            <?php
-                            // Lấy danh sách tác giả từ bảng tacgia
-                            $sql = "SELECT * FROM tacgia";
-                            $result=$conn->query($sql);
-
-                            // Hiển thị các tùy chọn tác giả trong dropdown list
-                            while ($row = $result ->fetch()) {
-                                if ($row['ma_tgia'] == $article['ma_tgia']) {
-                                    echo '<option value="' . $row['ma_tgia'] . '" selected>' . $row['ten_tgia'] . '</option>';
-                                } else {
-                                    echo '<option value="' . $row['ma_tgia'] . '">' . $row['ten_tgia'] . '</option>';
-                                }
+                        <select class='form-select' name='txtTacGia'>
+                        <?php
+                        foreach($authors as $key => $item){
+                            if($key == $article[0]->getMaTGia()){
+                                echo "<option value='".$key."' selected>".$item."</option>";
                             }
-                            // Đóng kết nối
-                            ?>
+                            echo "<option value='".$key."'>".$item."</option>";
+                        }
+                        ?>
                         </select>
                     </div>
                     <div class="input-group mt-3 mb-3">
-                        <span style="width: 10%" class="input-group-text" id="lblNoiDung">Ngày viết</span>
-                        <input readonly type="text" class="form-control" name="txtNgayViet" value="<?php echo $article['ngayviet']; ?>">
-                        
+                        <span style="width: 10%" class="input-group-text" id="lblTenBaiHat">Ngày viết</span>
+                        <input type="text" class="form-control" name="txtNgayViet" readonly value="<?php echo $article[0]->getNgayViet(); ?>">
                     </div>
                     <div class="input-group mb-3">
                         <span style="width: 10%; height: 20%" class="input-group-text" id="lblHinhAnh">Hình ảnh</span>
-                        <?php
-                        $sql = "SELECT * FROM baiviet";
-                        $result=$conn->query($sql);
-                       
-                        while ($row = $row = $result ->fetch()) {
-                            if ($row['ma_bviet'] == $article['ma_bviet']) {
-                                
-                                $imgFileName = "../images/songs/" . $row['hinhanh'];
-                                echo "<input style='height: 20%; width: 10%' type='file' id='img_edit' class='form-control' name='txtHinhAnh' value='".$imgFileName."'>
-                                    <img style='object-fit: contain;max-width: 30%;max-height: 30%;width: auto;height: auto;' src='".$imgFileName."'>";
-                            } else {
-                                
-                            }
-                        }
-                        ?>
+                        <input type="file" class="form-control" name="txtHinhAnh value="<?php echo $article[0]->getHinhAnh(); ?>">
                         
                     </div>
-
+                    
                     <div class="form-group float-end">
                         <p id="noti"></p>
                         <input type="submit" value="Sửa" class="btn btn-success">
-                        <a href="article.php" class="btn btn-warning">Quay lại</a>
+                        <a href="./index.php?controller=article" class="btn btn-warning">Quay lại</a>
                     </div>
                 </form>
                 
@@ -174,27 +121,7 @@
                     CKEDITOR.replace("ckeditor1");
                 </script>
                 <?php
-                // $id_old = "edit_article.php?id=" . $ma_bviet;
-                // echo $id_old;
-                ?>
-                
-
-                <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
-                <!-- <div class="row">
-            <div class="col-sm">
-                <h3 class="text-center text-uppercase fw-bold">Thêm mới bài viết</h3>
-                <form action="process_add_category.php" method="post">
-                    <div class="input-group mt-3 mb-3">
-                        <span class="input-group-text" id="lblCatName">Tên bài viết</span>
-                        <input type="text" class="form-control" name="txtCatName" >
-                    </div>
-                    <div class="form-group  float-end ">
-                        <input type="submit" value="Thêm" class="btn btn-success">
-                        <a href="category.php" class="btn btn-warning ">Quay lại</a>
-                    </div>
-                </form>
-            </div>
-        </div> -->
+                ?>         
     </main>
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">
         <h4 class="text-center text-uppercase fw-bold">TLU's music garden</h4>
@@ -210,7 +137,7 @@
                 var tenBaiHatInput = document.querySelector('input[name="txtTenBaiHat"]');
                 var tomTatInput = document.querySelector('textarea[name="txtTomTat"]');
                 var noiDungInput = document.querySelector('textarea[name="txtNoiDung"]');
-                var tacGiaInput = document.querySelector('select[name="sltTacGia"]');
+                var tacGiaInput = document.querySelector('select[name="txtTacGia"]');
 
                 // Kiểm tra trường Tiêu đề
                 if (tieuDeInput.value.trim() === '') {
@@ -223,18 +150,6 @@
                     alert('Bạn chưa nhập Tên bài hát');
                     return;
                 }
-
-                // // Kiểm tra trường Tóm tắt
-                // if (tomTatInput.value.trim() === '') {
-                //     alert('Bạn chưa nhập Tóm tắt');
-                //     return;
-                // }
-
-                // Kiểm tra trường Nội dung
-                // if (noiDungInput.value.trim() === '') {
-                //     alert('Bạn chưa nhập Nội dung');
-                //     return;
-                // }
 
                 // Kiểm tra trường Tác giả
                 if (tacGiaInput.value === '') {

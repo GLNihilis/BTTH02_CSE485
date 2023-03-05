@@ -8,8 +8,8 @@
     <title>Thêm bài viết</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style_login.css">
-    <script src="../js/ckeditor/ckeditor.js"></script>
+    <!-- <link rel="stylesheet" href="css/style_login.css"> -->
+    <script src="asset/javascript/ckeditor/ckeditor.js"></script>
 </head>
 
 <body>
@@ -49,7 +49,7 @@
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Thêm mới bài viết</h3>
-                <form action="process_add_article.php" method="post" enctype="multipart/form-data">
+                <form action="./index.php?controller=article&action=add" method="post">
 
                     <div class="input-group mt-3 mb-3">
                         <span style="width: 10%" class="input-group-text width15" id="lblTieuDe">Tiêu đề (*)</span>
@@ -63,18 +63,12 @@
 
                     <div class="input-group mt-3 mb-3">
                         <span style="width: 10%" class="input-group-text width15" id="lblTheLoai">Thể loại (*)</span>
-                        <select class="form-select" name="sltTheLoai">
-                            <?php
-
-                            // Lấy danh sách thể loại từ bảng theloai
-                            $sql = "SELECT * FROM theloai";
-                            $result = $dbh->query($sql);
-
-                            // Hiển thị các tùy chọn thể loại trong dropdown list
-                            while ($row = $result ->fetch()) {
-                                echo '<option value="' . $row['ma_tloai'] . '">' . $row['ten_tloai'] . '</option>';
-                            }
-                            ?>
+                        <select class='form-select' name='txtTheLoai'>
+                        <?php
+                        foreach($categorys as $key => $item){
+                            echo "<option value='".$key."'>".$item."</option>";
+                        }
+                        ?>
                         </select>
                     </div>
 
@@ -90,30 +84,23 @@
 
                     <div class="input-group mt-3 mb-3">
                         <span style="width: 10%" class="input-group-text width15" id="lblTacGia">Tác giả (*)</span>
-                        <select class="form-select" name="sltTacGia">
-                            <?php
-                            // Lấy danh sách tác giả từ bảng tacgia
-                            $sql = "SELECT * FROM tacgia";
-                            $result = $dbh->query($sql);
-
-                            // Hiển thị các tùy chọn thể loại trong dropdown list
-                            while ($row = $result ->fetch()) {
-                                echo '<option value="' . $row['ma_tgia'] . '">' . $row['ten_tgia'] . '</option>';
-                            }
-
-                            // Đóng kết nối
-                            ?>
+                        <select class='form-select' name='txtTacGia'>
+                        <?php
+                        foreach($authors as $key => $item){
+                            echo "<option value='".$key."'>".$item."</option>";
+                        }
+                        ?>
                         </select>
                     </div>
 
                     <div class="input-group mb-3">
                         <span style="width: 10%" class="input-group-text width15" id="lblHinhAnh">Hình ảnh</span>
-                        <input type="file" class="form-control" name="fileHinhAnh">
+                        <input type="file" class="form-control" name="txtHinhAnh">
                     </div>
 
                     <div class="form-group float-end">
                         <input type="submit" value="Thêm" class="btn btn-success">
-                        <a href="article.php" class="btn btn-warning">Quay lại</a>
+                        <a href="./index.php?controller=article" class="btn btn-warning ">Quay lại</a>
                     </div>
                 </form>
                 <script>
@@ -150,8 +137,8 @@
                 var tenBaiHatInput = document.querySelector('input[name="txtTenBaiHat"]');
                 var tomTatInput = document.querySelector('textarea[name="txtTomTat"]');
                 var noiDungInput = document.querySelector('textarea[name="txtNoiDung"]');
-                var tacGiaInput = document.querySelector('select[name="sltTacGia"]');
-                var hinhAnhInput = document.querySelector('input[name="fileHinhAnh"]');
+                var tacGiaInput = document.querySelector('select[name="txtTacGia"]');
+                var hinhAnhInput = document.querySelector('input[name="txtHinhAnh"]');
                 console.log(hinhAnhInput);
 
                 // Kiểm tra trường Tiêu đề
@@ -165,18 +152,6 @@
                     alert('Bạn chưa nhập Tên bài hát');
                     return;
                 }
-
-                // Kiểm tra trường Tóm tắt
-                // if (tomTatInput.value.trim() === '') {
-                //     alert('Bạn chưa nhập Tóm tắt');
-                //     return;
-                // }
-
-                // Kiểm tra trường Nội dung
-                // if (noiDungInput.value.trim() === '') {
-                //     alert('Bạn chưa nhập Nội dung');
-                //     return;
-                // }
 
                 // Kiểm tra trường Tác giả
                 if (tacGiaInput.value === '') {
@@ -195,12 +170,6 @@
                         return;
                     }
                 }
-                // } else {
-                //     alert('Không có file được chọn!');
-                //     return;
-                // }
-
-                // Nếu không có lỗi, submit form
                 form.submit();
             });
         </script>

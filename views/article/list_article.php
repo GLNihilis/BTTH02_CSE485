@@ -7,7 +7,7 @@
     <title>Music for Life</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style_login.css">
+    <!-- <link rel="stylesheet" href="css/style_login.css"> -->
 </head>
 <body>
     <header>
@@ -46,17 +46,17 @@
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="add_article.php" class="btn btn-success">Thêm mới</a>
+                <a href="index.php?controller=article&action=create" class="btn btn-success">Thêm mới</a>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">STT</th>
                             <th scope="col">Tiêu đề</th>
                             <th scope="col">Tên bài hát</th>
-                            <th scope="col">Mã thể loại</th>
+                            <th scope="col">Thể loại</th>
                             <th scope="col">Tóm tắt</th>
                             <th scope="col">Nội dung</th>
-                            <th scope="col">Mã tác giả</th>
+                            <th scope="col">Tác giả</th>
                             <th scope="col">Ngày viết</th>
                             <th scope="col">Hình ảnh</th>
                             <th>Sửa</th>
@@ -65,27 +65,30 @@
                     </thead>
                     <?php
                         foreach($articles as $key => $item){
-                    ?>
-                        <tr>
-                            <th scope="row"><?php echo $item->getMaBviet() ?></th>
-                            <td><?php echo $item->getTieuDe() ?></td>
-                            <td><?php echo $item->getTenBHat() ?></td>
-                            <td><?php echo $item->getMaTLoai() ?></td>
-                            <td><?php echo $item->getTomTat() ?></td>
-                            <td><?php echo $item->getNoiDung() ?></td>
-                            <td><?php echo $item->getMaTGia() ?></td>
-                            <td><?php echo $item->getNgayViet() ?></td>
-                            <td><?php echo $item->getHinhAnh() ?></td>
-                            <td>
-                                <a href="index.php?id=<?php echo $item->getMa_bviet() ?>&controller=article&action=edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                            </td>
-                            <td>
-                                <a href="javascript:void(0);" onclick="showConfirmationDialog(<?php echo $item->getMaBviet() ?>)"><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                    <?php        
+                            $catName = $articleService->getCatNameById($item->getMaTLoai());
+                            $auName = $articleService->getAuNameById($item->getMaTGia());
+                            echo
+                            "<tr>
+                                <td>".$item->getMaBviet()." </td>
+                                <td>".$item->getTieuDe()." </td>
+                                <td>".$item->getTenBHat()." </td>
+                                <td>".$catName." </td>
+                                <td>".$item->getTomTat()." </td>
+                                <td>".$item->getNoiDung()." </td>
+                                <td>".$auName." </td>
+                                <td>".$item->getNgayViet()." </td>
+                                <td>".$item->getHinhAnh()." </td>
+                                
+                                <td>
+                                    <a href='index.php?id=".$item->getMaBviet()." &controller=article&action=edit' \"><i class=\"fa-solid fa-pen-to-square\"></i></a>
+                                </td>
+                                <td>
+                                    <a href='javascript:void(0);' onclick='showConfirmationDialog(".$item->getMaBviet().")'><i class=\"fa-solid fa-trash\"></i></a>
+                                </td>
+                            </tr>";
                         }
                     ?>
+                    
                 </table>
             </div>
         </div>

@@ -6,7 +6,6 @@
         public function index(){
             $articleService = new ArticleService();
             $articles = $articleService->getAllArticles();
-
             include("views/article/list_article.php");
         }
         public function update(){
@@ -16,6 +15,9 @@
             include("views/article/list_article.php");
         }
         public function create(){
+            $articleService = new ArticleService();
+            $categorys = $articleService->getAllCategorys();
+            $authors = $articleService->getAllAuthor();
             include("views/article/add_article.php");
         }
 
@@ -29,14 +31,15 @@
         public function edit($ma_bviet){
             $articleService = new ArticleService();
             $article = $articleService->editArticle($ma_bviet);
-
+            $categorys = $articleService->getAllCategorys();
+            $authors = $articleService->getAllAuthor();
             include("views/article/edit_article.php");
         }
         public function delete(){
             $articleService = new ArticleService();
             $articles = $articleService->deleteArticle($_GET['id']);
 
-            include("views/article/article.php");
+            include("views/article/list_article.php");
         }
     }
 
