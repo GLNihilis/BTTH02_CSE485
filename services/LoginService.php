@@ -1,5 +1,5 @@
 <?php
-include("config/DBconnection.php");
+include("configs/DBConnection.php");
 include("models/Login.php");
     class LoginService
     {
