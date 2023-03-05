@@ -39,53 +39,27 @@
         </nav>
     </header>
 
-    <main id = ma class="container mt-5">
-    <div class="row">
-        <div class="col-sm">
-            <a href="index.php?controller=author&action=add" class="btn btn-success">Thêm mới</a>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Tên tác giả</th>
-                        <th scope="col">Hình tác giả</th>
-                        <th>Sửa</th>
-                        <th>Xóa</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <?php
-                    foreach ($authors as $key => $item) {
-                    ?>
-                        <tr>
-                            <th scope="row"><?php echo $item->getMaTgia() ?></th>
-                            <td><?php echo $item->getTenTgia() ?></td>
-                            <td>
-                                <img src="./asset/images/author/<?php echo $item->getHinhTgia() ?>" class="rounded-3" style="width: 150px;" alt="...">
-                            </td>
-                            <td>
-                                <a href="index.php?controller=author&action=edit&ma_tgia=<?php echo $item->getMaTgia() ?>"><i class="fa-solid fa-pen-to-square">
-                                    </i></a>
-                            </td>
-                            <td>
-                                <a href="javascript:void(0);" onclick="showConfirmationDialog(<?php echo $item->getMaTgia() ?>)"><i class="fa-solid fa-trash"></i></a>
-                            </td>
-                        </tr>
-                    <?php
-                    }
-                    ?>
-                </tbody>
-            </table>
+    <main class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-sm">
+                <h3 class="text-center text-uppercase fw-bold">Thêm mới tác giả</h3>
+                <form action="index.php?controller=author&action=add" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="path" value="/asset/images/songs/">
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblAutName">Tên tác giả</span>
+                        <input type="text" class="form-control" name="txtAutName" >
+                    </div>
+                    <div class="input-group mt-3 mb-3">
+                        <span class="input-group-text" id="lblAutImg">Hình tác giả</span>
+                        <input type="file" class="form-control" name="img" >
+                    </div>
+                    <div class="form-group float-end">
+                        <input type="submit" value="Thêm" class="btn btn-success">
+                        <a href="index.php?controller=author&action=index" class="btn btn-warning">Quay lại</a>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-    <script>
-    function showConfirmationDialog(id) {
-    if (confirm("Xóa tác giả sẽ xóa toàn bộ bài viết của tác giả. Bạn có muốn xóa không?")) {
-        window.location.href = "index.php?controller=author&action=delete&ma_tgia=" + id;
-    }
-}
-</script>
     </main>
     <footer class="bg-white d-flex justify-content-center align-items-center border-top border-secondary  border-2" style="height:80px">
         <h4 class="text-center text-uppercase fw-bold">TLU's music garden</h4>
