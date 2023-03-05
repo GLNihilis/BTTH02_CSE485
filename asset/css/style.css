@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 body{
-    font-family: sans-serif !important;
+    font-family: 'Numans', sans-serif !important;
 }
 .bg-body-tertiary{
     background-color:#fff !important;
 }
+
 .container{
 
 }
@@ -19,6 +20,7 @@ body{
     border: none;
     padding: 5px;
 }
+
 .my-logo{
     max-width: 20%;
 }
@@ -40,5 +42,3 @@ body{
 .my-title{
     overflow-y: hidden;
 }
-
-
