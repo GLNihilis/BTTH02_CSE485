@@ -76,7 +76,7 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            <?php echo count($categorys) ?>
+                            10
                         </h5>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            <?php echo count($authors) ?>
+                            20
                         </h5>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            <?php echo count($articles) ?>
+                            120
                         </h5>
                     </div>
                 </div>
